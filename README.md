@@ -55,7 +55,7 @@ yarn build
 php -S localhost:80 -t public
 
 # or start noe server
-php noe server
+php noe serve
 ```
 
 ## Console
