@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-$root = dirname(dirname(__DIR__));
+$root = dirname(__DIR__, 2);
 require_once $root . '/vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -8,20 +8,8 @@ use Noesis\App\Router\ApiRouterInvoker;
 use Noesis\App\Router\WebRouterInvoker;
 use Noesis\App\Container\ContainerInvoker;
 use Noesis\App\Middleware\AppMiddlewareInvoker;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
-$capsule = new Capsule;
-$capsule->addConnection([
-    "driver" => "sqlite",
-    "host" =>"127.0.0.1",
-    "database" => dirname(__DIR__, 2) . '/db/noesis.db',
-    "username" => "root",
-    "password" => ""
-]);
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
-
-$dotenv = Dotenv::createImmutable($root);
+$dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $app = AppFactory::createFromContainer((new ContainerInvoker)());

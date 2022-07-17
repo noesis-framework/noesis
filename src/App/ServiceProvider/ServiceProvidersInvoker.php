@@ -7,7 +7,7 @@ class ServiceProvidersInvoker
 {
     public function __invoke(): array
     {
-        $providers = require dirname(dirname(dirname(__DIR__))) . '/server/config/providers.php';
+        $providers = require dirname(__DIR__, 3) . '/server/config/providers.php';
 
         $service_providers = [];
         foreach($providers as $fully_qualified_name => $service_provider) {        
